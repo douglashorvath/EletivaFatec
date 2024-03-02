@@ -1,11 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Aifude</title>
 </head>
-<body>
+
+<body onload="window.alert('Seja Bem Vindo')">
+    <p>Hello World</p>
+    <input type="button" id="valor">
+    <button id="enviar">Enviar</button>
     
+    <script>
+        document.querySelector("#enviar").addEventListener("click",mudarValor);
+
+        function mudarValor(){
+            document.querySelector("#valor").value = "Novo Conteúdo";
+        }
+    </script>
 </body>
+
 </html>
