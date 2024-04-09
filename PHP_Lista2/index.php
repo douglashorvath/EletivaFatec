@@ -6,7 +6,7 @@
     <title>Lista 2 de Exercícios PHP</title>
 </head>
 <body>
-    <h1>Lista 1 de Exercícios PHP</h1>
+    <h1>Lista 2 de Exercícios PHP</h1>
     <p><a href="exercicio01.php"><h2>Exercicio 01</h2></a></p>
     <p><a href="exercicio02.php"><h2>Exercicio 02</h2></a></p>
     <p><a href="exercicio03.php"><h2>Exercicio 03</h2></a></p>

@@ -21,7 +21,16 @@
     </header>
     <main>
     <?php 
-    
+        if(isset($_POST["numeros"]))
+        {
+            $numeros = $_POST["numeros"];
+            $multiplicador = $_POST["multiplicador"];
+            foreach($numeros as $n)
+            {
+                $mult = $n * $multiplicador;
+                echo "<h3> $n * $multiplicador = $mult </h3>";
+            }
+        }
     
     ?>
 
