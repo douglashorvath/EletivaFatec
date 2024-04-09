@@ -1,0 +1,491 @@
+* {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Cor de fundo semi-transparente */
+  z-index: 2; /* Z-index alto para garantir que esteja acima do conteúdo */
+}
+
+/* Estilo para um overlay (sobreposição) utilizado para escurecer a página quando necessário:
+   - Inicialmente oculto (display: none)
+   - Posicionamento fixo para cobrir toda a tela
+   - Fundo semi-transparente preto (rgba(0, 0, 0, 0.5))
+   - Z-index alto para garantir que esteja acima do conteúdo principal */
+
+.no-scroll {
+  overflow: hidden;
+}
+
+/* Estilo aplicado ao corpo da página quando o scroll é desabilitado:
+   - Oculta o overflow para desabilitar a rolagem da página quando o 
+   menu comprimido estiver ativo na tela */
+
+.beginning {
+  background-color: #eb0033;
+  display: flex;
+  flex-direction: column;
+  padding: 0 9vw 9vw 9vw;
+  color: white;
+}
+
+header {
+  li {
+    list-style: none;
+  }
+  a {
+    color: white;
+    text-decoration: none;
+  }
+}
+
+.navbar {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 0 0 0;
+}
+
+/* Estilo para a barra de navegação (navbar):
+   - Usa flexbox para organizar os itens na horizontal
+   - Alinha os itens verticalmente ao centro
+   - Adiciona espaçamento interno na parte superior */
+
+.nav-menu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 60px;
+}
+
+.hamburger {
+  display: none;
+  cursor: pointer;
+}
+
+.nav-subitem {
+  display: none;
+  font-weight: 600;
+  font-size: 28px;
+  color: black;
+}
+/* Estilo para os subitens de navegação na barra de menu:
+   - Inicialmente ocultos (display: none)
+   - Define o peso da fonte como 600 (semi-negrito)
+   - Define o tamanho da fonte como 28 pixels
+   - Define a cor do texto como preto */
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 3.5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: white;
+}
+/* Estilo para as barras (linhas) do ícone de menu "hamburger":
+   - Define as dimensões (largura e altura) das barras
+   - Define o espaçamento ao redor das barras
+   - Adiciona uma transição suave para animações */
+
+.search-bar {
+  display: none;
+  border: none;
+  background-color: white;
+  margin: 16px 0;
+  padding: 0.3rem 1rem;
+  font-size: 16px;
+  width: 60vw;
+  border-radius: 0.2rem;
+}
+/* Estilo para a barra de pesquisa (search-bar):
+   - Inicialmente oculta (display: none)
+   - Remove a borda da barra de pesquisa
+   - Define o fundo branco para a barra de pesquisa
+   - Adiciona margem ao redor da barra de pesquisa
+   - Define o tamanho da fonte e a largura da barra de pesquisa */
+
+main {
+  display: flex;
+  flex-direction: row;
+}
+main div:first-child h1 {
+  font-size: 58px;
+}
+main div:first-child h3 {
+  width: 90%;
+  font-weight: 500;
+}
+
+.white-button {
+  background-color: white;
+  border-radius: 0.5rem;
+  color: #eb0033;
+  border: none;
+  padding: 0 1.5rem;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+#gap-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+@media (max-width: 1024px) {
+  .image-container,
+  .image-mask-primary {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    img {
+      width: 42vw;
+    }
+  }
+  .text p {
+    font-size: larger !important;
+    width: 100% !important;
+  }
+  .grid-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  }
+  .hamburger {
+    display: flex;
+    flex-direction: column;
+    z-index: 3;
+  }
+
+  /*Esconde a primeira barra e rotaciona as duas ultimas para fazer um X*/
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger.active .bar:nth-child(3) {
+    transform: translateY(-12px) rotate(-45deg);
+  }
+
+  header {
+    a {
+      color: black;
+    }
+  }
+  .nav-menu {
+    position: fixed;
+    left: -120%;
+    top: 88px;
+    gap: 0;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    width: 100%;
+    text-align: left;
+    transition: 0.3s;
+    z-index: 3;
+    align-items: stretch;
+    font-weight: 500;
+  }
+  .nav-item {
+    margin: 16px 0;
+  }
+  .nav-menu.active {
+    left: 0;
+    padding: 1rem 7rem;
+  }
+  .nav-subitem.active {
+    display: flex;
+  }
+  .overlay.active {
+    display: flex;
+  }
+  .search-bar.active {
+    display: flex;
+  }
+}
+
+@media (max-width: 800px) {
+  main div:first-child h1 {
+    font-size: xx-large !important;
+  }
+  .white-button {
+    font-size: 14px;
+  }
+  .red-button {
+    width: unset !important;
+    p {
+      font-size: 14px !important;
+    }
+  }
+  .grid-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)) !important;
+  }
+  .flex-wrapper {
+    h2 {
+      font-size: medium;
+    }
+    p {
+      font-size: smaller;
+    }
+  }
+}
+
+@media (max-width: 500px) {
+  main {
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-menu.active {
+    padding: 1rem 3rem;
+  }
+  .image-container img {
+    width: 80vw;
+  }
+  .row-wrapper {
+    flex-direction: column-reverse !important;
+    gap: 2rem;
+  }
+  .text {
+    width: 100% !important;
+  }
+  .image-mask-primary img {
+    width: 80vw;
+  }
+  .grid-wrapper {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)) !important;
+  }
+  .image-mask-secondary img {
+    height: 40vw !important;
+  }
+  .copyright {
+    flex-wrap: wrap-reverse;
+  }
+}
+
+/*--------------------------------------------------------------------*/
+
+.middle {
+  display: flex;
+  flex-direction: column;
+  padding: 7rem 9vw 7rem 9vw;
+  gap: 7rem;
+}
+
+.row-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.image-mask-primary img {
+  border-radius: 1rem;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  width: 34vw;
+}
+.text h2 {
+  color: #eb0033;
+  font-size: 36px;
+  margin: 0;
+  padding: 0;
+}
+.text p {
+  font-size: 20px;
+  width: 90%;
+}
+
+.red-button {
+  color: white;
+  border-radius: 0.5rem;
+  background-color: #eb0033;
+  border: none;
+  padding: 0 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20rem;
+
+  p {
+    font-size: 18px;
+  }
+}
+
+/*----------------------------------------------------------------------*/
+
+.end {
+  background-color: #f7f7f7;
+  padding: 7rem 9vw;
+  align-items: center;
+  text-align: center;
+  gap: 3.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  h1,
+  p {
+    padding: 0%;
+    margin: 0%;
+  }
+}
+
+.grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(300px, 1fr)
+  ); /* Ajustado para se adaptar ao tamanho do conteúdo */
+  gap: 2rem;
+  width: -webkit-fill-available;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 1rem;
+  box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.image-mask-secondary img {
+  border-radius: 1rem 1rem 0 0;
+  width: 100%;
+  height: 15vw;
+  max-width: 100%; /* Ajustado para garantir que a imagem não ultrapasse os limites do contêiner */
+}
+
+.flex-wrapper {
+  padding: 0 2rem 0 2rem;
+}
+
+.news {
+  flex: 2; /* Alterado para flex: 1 para que a .news ocupe o espaço restante */
+  display: flex;
+  flex-direction: column;
+}
+
+.data {
+  margin-top: auto; /* Define a margem superior automática para empurrar a data para o canto inferior */
+  color: #666;
+}
+
+#button-container {
+  display: flex;
+  flex-direction: column;
+  align-self: flex-end;
+}
+
+/*---------------------------------------------------*/
+
+footer {
+  display: flex;
+  flex-direction: column;
+  background-color: #eb0033;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem 0; /* Adicionado preenchimento superior e inferior */
+
+  /* Estilização para os títulos de cada seção */
+  h4 {
+    margin-bottom: 1rem;
+    color: white; /* Adicionado para garantir a cor branca */
+  }
+
+  /* Estilização para as listas de links */
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  /* Estilização para os links */
+  a {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease; /* Adicionado efeito de transição suave para a cor */
+  }
+
+  /* Estilização para os links ao passar o mouse */
+  a:hover {
+    color: #ffcc00; /* Alterado para uma cor mais clara ao passar o mouse */
+  }
+
+  /* Estilização para o logotipo do iFood */
+  img {
+    width: 2rem;
+    margin-bottom: 1rem; /* Adicionado espaço abaixo do logotipo */
+  }
+
+  /* Estilização para o texto de direitos autorais */
+  p {
+    color: white;
+    font-size: 14px;
+    margin-top: 1rem;
+  }
+}
+
+.footer-wrapper {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit,
+    minmax(200px, 1fr)
+  ); /* Ajustado para se adaptar ao tamanho do conteúdo */
+  gap: 2rem;
+  padding: 2rem;
+  width: -webkit-fill-available;
+}
+
+/* Estilos para cada seção do footer */
+.sobre,
+.comunidade,
+.sustentabilidade,
+.news-footer,
+.redes {
+  width: -webkit-fill-available;
+  color: white;
+}
+
+.copyright {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center; /* Alterado para centralizar o texto */
+  align-items: center; /* Alterado para centralizar o texto verticalmente */
+  gap: 1rem; /* Adicionado espaço entre os elementos */
+  background-color: #890019;
+  color: white;
+}
+
+.copyright img {
+  width: 2rem;
+}
+
+/*----------------------------------------------------------------------------*/
