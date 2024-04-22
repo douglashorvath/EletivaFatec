@@ -25,6 +25,8 @@
     </header>
     <main>
     <?php 
+
+        
     
     if(isset($_POST['produtos']) && isset($_POST['precos'])){
         
@@ -51,16 +53,35 @@
             }
         }
 
-        $media = $precototal / $numeroprods;
+        $media = 0;
+        if($numeroprods > 0)
+            $media = $precototal / $numeroprods;
+
         echo "<h3>A quantidade de produtos com preço inferior a R$50,00 é: $prod50 </h3>";
-        echo "<h3>Os produtos com preço entre R$50,00 e R$100,00 são: </h3>";
-        echo "<ol>";
-        foreach($prods50a100 as $p)
+        
+        if(!empty($prods50a100))
         {
-            echo "<h3><li>$p</li></h3>";
+            echo "<h3>Os produtos com preço entre R$50,00 e R$100,00 são: </h3>";
+            echo "<ol>";
+            foreach($prods50a100 as $p)
+            {
+                echo "<h3><li>$p</li></h3>";
+            }
+            echo "</ol>";
         }
-        echo "</ol>";
-        echo "<h3>A média dos preços dos produtos com preço superior a R$100,00 é: R$ $media </h3>";
+        else{
+            echo "<h3>Nenhum produto com preço entre R$50,00 e R$100,00 encontrado</h3>";
+        }
+
+        
+        if($numeroprods > 0)
+        {   
+            echo "<h3>A média dos preços dos produtos com preço superior a R$100,00 é: R$ $media </h3>";
+        }
+        else{
+            echo "<h3>Não existem produtos com preço superior a R$100,00</h3>";
+        }
+        
 
     }
     
