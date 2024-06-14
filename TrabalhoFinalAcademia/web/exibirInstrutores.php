@@ -4,7 +4,7 @@ require_once("cabecalho.php");
 
 <h1 class="text-bg-dark p-1 m-2">Instrutores</h1>
 <div class="row mb-3">
-    <form action="exibirInstrores.php" method="POST" class="form-inline">
+    <form action="exibirInstrutores.php" method="POST" class="form-inline">
         <div class="input-group w-100">
             <input type="text" name="search" class="form-control" placeholder="Buscar instrutores...">
             <div class="input-group-append">
@@ -56,7 +56,7 @@ require_once("cabecalho.php");
                     <td>
                         <a href="editarInstrutor.php?instrid=<?= $instrutor->getId() ?>" class="btn btn-warning btn-sm" title="Alterar"><i class="fas fa-edit"></i></a>
                         <a href="removerInstrutor.php?instrid=<?= $instrutor->getId() ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
-                        <a href="exibirAulas.php?instrid=<?= $instrutor->getId() ?>" class="btn btn-info btn-sm" title="Ver Aulas"><i class="fas fa-book-open"></i></a>
+                        <a href="visualizarAulas.php?instrid=<?= $instrutor->getId() ?>" class="btn btn-info btn-sm" title="Ver Aulas"><i class="fas fa-book-open"></i></a>
                     </td>
                 </tr>
 

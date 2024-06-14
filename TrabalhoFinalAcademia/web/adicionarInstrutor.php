@@ -3,12 +3,14 @@ require_once("cabecalho.php");
 require_once("../classes/Instrutor.php");
 if (isset($_POST['submit'])) {
     if (!isset($_POST['nome'])) {
-        echo "Preencha todos os campos!";
+        $msg = base64_encode("Preencha todos os campos!");
+        header("Location: adicionarInstrutor.php?error=" . $msg);
     } else {
 
         $nome = $_POST['nome'];
         if (empty($nome)) {
-            echo "Preencha todos os campos!";
+            $msg = base64_encode("Preencha todos os campos!");
+            header("Location: adicionarInstrutor.php?error=" . $msg);
         } else {
             $instrutor = new Instrutor();
             $instrutor->setNome($nome);

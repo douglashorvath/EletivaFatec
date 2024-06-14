@@ -70,8 +70,8 @@
               Aulas
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Adicionar Aula</a></li>
-              <li><a class="dropdown-item" href="#">Visualizar Aulas</a></li>
+              <li><a class="dropdown-item" href="adicionarAula.php">Adicionar Aula</a></li>
+              <li><a class="dropdown-item" href="visualizarAulas.php">Visualizar Aulas</a></li>
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -79,8 +79,8 @@
               Participação
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Registrar Participação</a></li>
-              <li><a class="dropdown-item" href="#">Visualizar Presenças</a></li>
+              <li><a class="dropdown-item" href="registrarParticipacao.php">Registrar Participação</a></li>
+              <li><a class="dropdown-item" href="visualizarParticipacao.php">Visualizar Presenças</a></li>
             </ul>
           </li>
         </ul>

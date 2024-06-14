@@ -4,14 +4,16 @@ require_once("../classes/Membro.php");
 
 if (isset($_POST['submit'])) {
     if (!isset($_POST['nome'], $_POST['idade'], $_POST['tipo_plano'])) {
-        echo "Preencha todos os campos!";
+        $msg = base64_encode("Preencha todos os campos!");
+        header("Location: editarMembro.php?error=" . $msg);
     } else {
         $memberid = $_POST['memberid'];
         $nome = $_POST['nome'];
         $idade = $_POST['idade'];
         $tipo_plano = $_POST['tipo_plano'];
         if (empty($nome) || empty($idade) || empty($tipo_plano)) {
-            echo "Preencha todos os campos!";
+            $msg = base64_encode("Preencha todos os campos!");
+            header("Location: editarMembro.php?error=" . $msg);
         }
         $membro = new Membro();
         $membro->setId($memberid);

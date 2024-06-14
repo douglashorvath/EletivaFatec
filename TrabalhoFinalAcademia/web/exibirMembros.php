@@ -56,7 +56,7 @@ require_once("cabecalho.php");
                     <td>
                         <a href="editarMembro.php?memberid=<?= $membro->getId() ?>" class="btn btn-warning btn-sm" title="Alterar"><i class="fas fa-edit"></i></a>
                         <a href="removerMembro.php?memberid=<?= $membro->getId() ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
-                        <a href="exibirParticipacoes.php?memberid=<?= $membro->getId() ?>" class="btn btn-info btn-sm" title="Ver Participações"><i class="fas fa-calendar-alt"></i></a>
+                        <a href="visualizarParticipacao.php?memberid=<?= $membro->getId() ?>" class="btn btn-info btn-sm" title="Ver Participações"><i class="fas fa-calendar-alt"></i></a>
                     </td>
                 </tr>
 

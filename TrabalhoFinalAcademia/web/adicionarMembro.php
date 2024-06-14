@@ -1,15 +1,17 @@
 <?php
-require("cabecalho.php");
+require_once("cabecalho.php");
 require_once("../classes/Membro.php");
 if (isset($_POST['submit'])) {
     if (!isset($_POST['nome'], $_POST['idade'], $_POST['tipo_plano'])) {
-        echo "Preencha todos os campos!";
+        $msg = base64_encode("Preencha todos os campos!");
+        header("Location: adicionarMembro.php?error=" . $msg);
     } else {
         $nome = $_POST['nome'];
         $idade = $_POST['idade'];
         $tipo_plano = $_POST['tipo_plano'];
         if (empty($nome) || empty($idade) || empty($tipo_plano)) {
-            echo "Preencha todos os campos!";
+            $msg = base64_encode("Preencha todos os campos!");
+            header("Location: adicionarMembro.php?error=" . $msg);
         }
         $membro = new Membro();
         $membro->setNome($nome);
@@ -47,6 +49,7 @@ if (isset($_POST['submit'])) {
             </select>
         </div>
         <button type="submit" name="submit" class="btn btn-primary mt-2">Adicionar Membro</button>
-        <?php
-        require_once("rodape.php");
-        ?>
+    </form>
+    <?php
+    require_once("rodape.php");
+    ?>
