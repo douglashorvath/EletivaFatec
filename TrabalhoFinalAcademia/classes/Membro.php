@@ -149,4 +149,17 @@ class Membro
             return false;
         }
     }
+
+    public function excluirMembro()
+    {
+        try {
+            $conexao = conectarBanco();
+            $sql = "DELETE FROM membro WHERE id = :id";
+            $stmt =  $conexao->prepare($sql);
+            $stmt->bindValue(":id", $this->id);
+            return $stmt->execute();
+        } catch (PDOException $ex) {
+            return false;
+        }
+    }
 }

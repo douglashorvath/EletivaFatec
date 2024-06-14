@@ -1,5 +1,5 @@
 <?php
-require_once("../cabecalho.php");
+require_once("cabecalho.php");
 ?>
 
 <h1 class="text-bg-dark p-1 m-2">Membros</h1>
@@ -27,7 +27,7 @@ require_once("../cabecalho.php");
     </thead>
     <tbody>
         <?php
-        require "Membro.php";
+        require "../classes/Membro.php";
 
         if (isset($_POST['search'])) {
             $nome = $_POST['search'];
@@ -54,9 +54,9 @@ require_once("../cabecalho.php");
                     <td><?= $membro->getIdade() ?></td>
                     <td><?= $membro->getTipo_plano() ?></td>
                     <td>
-                        <a href="editar.php?id=<?= $membro->getId() ?>" class="btn btn-warning btn-sm" title="Alterar"><i class="fas fa-edit"></i></a>
-                        <a href="excluir.php?id=<?= $membro->getId() ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
-                        <a href="exibirParticipacoes.php?id_membro=<?= $membro->getId() ?>" class="btn btn-info btn-sm" title="Ver Participações"><i class="fas fa-calendar-alt"></i></a>
+                        <a href="editarMembro.php?memberid=<?= $membro->getId() ?>" class="btn btn-warning btn-sm" title="Alterar"><i class="fas fa-edit"></i></a>
+                        <a href="removerMembro.php?memberid=<?= $membro->getId() ?>" class="btn btn-danger btn-sm" title="Excluir"><i class="fas fa-trash-alt"></i></a>
+                        <a href="exibirParticipacoes.php?memberid=<?= $membro->getId() ?>" class="btn btn-info btn-sm" title="Ver Participações"><i class="fas fa-calendar-alt"></i></a>
                     </td>
                 </tr>
 
@@ -71,5 +71,5 @@ require_once("../cabecalho.php");
 </table>
 
 <?php
-require_once("../rodape.php");
+require_once("rodape.php");
 ?>

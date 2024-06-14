@@ -7,6 +7,7 @@ class Instrutor
     private $certificacoes = array();
     private $especializacoes = array();
 
+
     public function getId()
     {
         return $this->id;
@@ -47,6 +48,16 @@ class Instrutor
         $this->especializacoes = $especializacoes;
     }
 
+    public function addCertificacao($certificacao)
+    {
+        $this->certificacoes[] = $certificacao;
+    }
+
+    public function addEspecializacao($especializacao)
+    {
+        $this->especializacoes[] = $especializacao;
+    }
+
     public function inserirInstrutor()
     {
         try {
@@ -79,8 +90,8 @@ class Instrutor
                 $instrutor = new Instrutor();
                 $instrutor->setId($obj['id']);
                 $instrutor->setNome($obj['nome']);
-                $instrutor->setCertificacoes(self::getCertificacoes($obj['id']));
-                $instrutor->setEspecializacoes(self::getEspecializacoes($obj['id']));
+                $instrutor->setCertificacoes(self::getTodasCertificacoes($obj['id']));
+                $instrutor->setEspecializacoes(self::getTodasEspecializacoes($obj['id']));
                 return $instrutor;
             }
         } catch (PDOException $ex) {
@@ -101,8 +112,30 @@ class Instrutor
                 $instrutor = new Instrutor();
                 $instrutor->setId($i['id']);
                 $instrutor->setNome($i['nome']);
-                $instrutor->setCertificacoes(self::getCertificacoes($i['id']));
-                $instrutor->setEspecializacoes(self::getEspecializacoes($i['id']));
+                $instrutor->setCertificacoes(self::getTodasCertificacoes($i['id']));
+                $instrutor->setEspecializacoes(self::getTodasEspecializacoes($i['id']));
+                $instrutores[] = $instrutor;
+            }
+            return $instrutores;
+        } catch (PDOException $ex) {
+            return null;
+        }
+    }
+
+    public static function getTodosInstrutores()
+    {
+        try {
+            $conexao = conectarBanco();
+            $sql = "SELECT * FROM instrutor";
+            $stmt = $conexao->prepare($sql);
+            $stmt->execute();
+            $instrutores = array();
+            foreach ($stmt as $instr => $i) {
+                $instrutor = new Instrutor();
+                $instrutor->setId($i['id']);
+                $instrutor->setNome($i['nome']);
+                $instrutor->setCertificacoes(self::getTodasCertificacoes($i['id']));
+                $instrutor->setEspecializacoes(self::getTodasEspecializacoes($i['id']));
                 $instrutores[] = $instrutor;
             }
             return $instrutores;
@@ -155,13 +188,13 @@ class Instrutor
     {
         try {
             $conexao = conectarBanco();
-            $sql = "DELETE FROM especializacao WHERE instrutor_id = :instrutor_id";
+            $sql = "DELETE FROM especializacao_instrutor WHERE instrutor_id = :instrutor_id";
             $stmt = $conexao->prepare($sql);
             $stmt->bindValue(":instrutor_id", $this->id);
             $stmt->execute();
 
             foreach ($this->especializacoes as $especializacao) {
-                $sql = "INSERT INTO especializacao (descricao, instrutor_id) VALUES (:descricao, :instrutor_id)";
+                $sql = "INSERT INTO especializacao_instrutor (descricao, instrutor_id) VALUES (:descricao, :instrutor_id)";
                 $stmt = $conexao->prepare($sql);
                 $stmt->bindValue(":descricao", $especializacao);
                 $stmt->bindValue(":instrutor_id", $this->id);
@@ -194,7 +227,7 @@ class Instrutor
     {
         try {
             $conexao = conectarBanco();
-            $sql = "SELECT descricao FROM especializacao WHERE instrutor_id = :instrutor_id";
+            $sql = "SELECT descricao FROM especializacao_instrutor WHERE instrutor_id = :instrutor_id";
             $stmt = $conexao->prepare($sql);
             $stmt->bindValue(":instrutor_id", $instrutor_id);
             $stmt->execute();
@@ -205,6 +238,28 @@ class Instrutor
             return $especializacoes;
         } catch (PDOException $ex) {
             return array();
+        }
+    }
+
+    public function excluirInstrutor()
+    {
+        try {
+            $conexao = conectarBanco();
+            $sql = "DELETE FROM certificacao_instrutor WHERE instrutor_id = :instrutor_id";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":instrutor_id", $this->id);
+            $stmt->execute();
+            $sql = "DELETE FROM especializacao_instrutor WHERE instrutor_id = :instrutor_id";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":instrutor_id", $this->id);
+            $stmt->execute();
+            $sql = "DELETE FROM instrutor WHERE id = :id";
+            $stmt = $conexao->prepare($sql);
+            $stmt->bindValue(":id", $this->id);
+            return $stmt->execute();
+        } catch (PDOException $ex) {
+            echo $ex;
+            return false;
         }
     }
 }
